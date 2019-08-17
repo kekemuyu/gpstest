@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>JJG设置</title>
+		
+		<link rel="stylesheet" href="./bootstrap-3.3.7/css/bootstrap.min.css">		
+		<link rel="stylesheet" type="text/css" href="flatpickr/dist/flatpickr.min.css">
+		<script src="./js/jquery.min.js"></script>
+		<script src="./bootstrap-3.3.7/js/bootstrap.min.js"></script>
+		<script src="flatpickr/dist/flatpickr.min.js"></script>
+		<style type="text/css">
+			input {
+				/* 	background-color: #efefef; */
+				border-color: #000000;
+				border-style: solid;
+				border-top-width: 0px;
+				border-right-width: 0px;
+				border-bottom-width: 1px;
+				border-left-width: 0px;
+				width: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h5 class="panel-title">基础信息</h5>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-6">
+						<label for="inputCode">编号:</label>
+						<input type="text" id="codeid" placeholder="">
+					</div>
+					<div class="col-sm-6">
+						<label for="inputCode">日期:</label>						
+						<input id="date"  placeholder="......">						
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<label for="inputCode">委托单位:</label>
+						<input type="text" id="weituo" placeholder="">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<label for="inputCode">单位地址:</label>
+						<input type="text" id="danwei" placeholder="">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<label for="inputCode">检定地点:</label>
+						<input type="text" id="testaddr" placeholder="">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<label for="inputCode">检定员:</label>
+						<input type="text" id="jianding" placeholder="">
+					</div>
+					<div class="col-sm-6">
+						<label for="inputCode">检定员:</label>
+						<input type="text" id="heyan" placeholder="">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h5 class="panel-title">控制参数</h5>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-3">
+						<label for="inputCode">脉冲圈数:</label>
+						<input type="text" id="pulseamps" placeholder="">
+					</div>
+					<div class="col-sm-6">
+						<label for="inputCode">充电桩脉冲常数:</label>
+						<input type="text" id="pileamps" placeholder="">
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<label for="inputCode">测量点1电流:</label>
+						<input type="text" id="testa1" placeholder="">
+					</div>
+					<div class="col-sm-4">
+						<label for="inputCode">测量点2电流:</label>
+						<input type="text" id="testa2" placeholder="">
+					</div>
+					<div class="col-sm-4">
+						<label for="inputCode">测量点3电流:</label>
+						<input type="text" id="testa3" placeholder="">
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h5 class="panel-title">充电机信息</h5>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-3">
+						<label for="inputCode">最大电流:</label>
+						<input type="text" id="maxa" placeholder="">
+					</div>
+					<div class="col-sm-6">
+						<label for="inputCode">脉冲常数:</label>
+						<input type="text" id="pilepulseamps" placeholder="">
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label for="inputCode">准确度等级:</label>
+						<input type="text" id="grade" placeholder="">
+					</div>
+					<div class="col-sm-6">
+						<label for="inputCode">计费单价:</label>
+						<input type="text" id="price" placeholder="">
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<footer class="footer navbar-fixed-bottom " style="background-color:#F8F8F8">
+		<div class="container text-right">
+			<button class="btn btn-default " type="button" id="btnClose">关闭</button>
+			<button class="btn btn-default " type="button" id="btnSave">保存</button>
+		</div>
+	</footer>
+	
+	<script src="js/util.js"></script>
+	<script type="text/javascript">
+		$('#btnClose').click(function() {
+			window.history.back(-1);
+		});
+		
+		async function initbase(){
+			basedata=await baseread()
+			$('#codeid').val(basedata.Codeid);
+			$('#weituo').val(basedata.Weituo);
+			$('#danwei').val(basedata.Danwei);
+			$('#testaddr').val(basedata.Testaddr);
+			$('#jianding').val(basedata.Tester);
+			$('#heyan').val(basedata.Heyan);
+		}
+		
+		async function initcontrol(){
+			data=await controlread()
+			$('#pileamps').val(data.Pileamps);
+			$('#pulseamps').val(data.Pulseamps);
+			$('#testa1').val(data.Testa1);
+			$('#testa2').val(data.Testa2);
+			$('#testa3').val(data.Testa3);
+		}
+		
+		async function initpile(){
+			data=await pileread()
+			$('#maxa').val(data.Maxa);
+			$('#pilepulseamps').val(data.Pulseamps);
+			$('#grade').val(data.Grade);
+			$('#price').val(data.Price);
+
+		}
+		
+		function init(){
+			$("#date").flatpickr({
+				enableTime: true,
+				defaultDate: new Date(),
+				dateFormat: "Y-m-d H:i:S",								
+			});
+			
+			initbase();
+			initcontrol();
+			initpile();
+		}
+		
+		 $('#btnSave').click(async function() {
+			var basedata, controldata, piledata;
+			basedata = {
+				Codeid: $('#codeid').val(),
+				Weituo: $('#weituo').val(),
+				Danwei: $('#danwei').val(),
+				Testaddr: $('#testaddr').val(),
+				Tester: $('#jianding').val(),
+				Heyan: $('#heyan').val(),
+				Lastdate:new Date($('#date').val()).format("yyyy-MM-dd hh:mm:ss"),
+			}
+			
+			controldata = {
+				Pileamps:  $('#pileamps').val(),
+				Pulseamps: $('#pulseamps').val(),
+				Testa1: $('#testa1').val(),
+				Testa2: $('#testa2').val(),
+				Testa3: $('#testa3').val(),
+			}
+			piledata = {
+				Maxa :$('#maxa').val(),
+				Pulseamps: $('#pilepulseamps').val(),
+				Grade :$('#grade').val(),
+				Price: $('#price').val(),
+			}
+			
+			await baseset(basedata);
+			await controlset(controldata);
+			await pileset(piledata);
+		});
+		
+		init();
+	</script>
+
+</html>

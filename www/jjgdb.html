@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jjg数据管理</title>
+
+		<!-- <link href="./css/open-iconic-bootstrap.min.css" rel="stylesheet"> -->
+		<link href="./bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="./css/simple-sidebar.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="flatpickr/dist/flatpickr.min.css">
+		<style type="text/css">
+		</style>
+	</head>
+
+	<body style="overflow: hidden !important;">
+
+
+		<div class="d-flex" id="wrapper">
+			<!-- Sidebar -->
+			<div class="bg-light border-right " id="sidebar-wrapper">
+				<div class="sidebar-heading">功能</div>
+				<div class="list-group list-group-flush">
+					<a href="#" id="base" class="list-group-item list-group-item-action bg-light">基本信息</a>
+					<a href="#" id="control" class="list-group-item list-group-item-action bg-light">控制参数</a>
+					<a href="#" id="pile" class="list-group-item list-group-item-action bg-light">充电机信息</a>
+					<a href="#" id="env" class="list-group-item list-group-item-action bg-light">外部环境</a>
+					<a href="#" id="view" class="list-group-item list-group-item-action bg-light">外观测试</a>
+					<a href="#" id="res" class="list-group-item list-group-item-action bg-light">绝缘电阻</a>
+					<a href="#" id="workerr" class="list-group-item list-group-item-action bg-light">工作误差</a>
+					<a href="#" id="viewworkerr" class="list-group-item list-group-item-action bg-light">示值及付费金额</a>
+					<a href="#" id="time" class="list-group-item list-group-item-action bg-light">时钟误差</a>
+				</div>
+			</div>
+
+			<div id="page-content-wrapper">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+					<button class="btn btn-primary" id="menu-toggle"><span class="navbar-toggler-icon"></span></button>
+					<ul class="nav nav-pills" id="menuTab">
+						<li class="nav-item" onclick="queryData()"><a class="nav-link">查询记录</a></li>
+						<li class="nav-item"><a class="nav-link">生成报表</a></li>
+					</ul>
+				</nav>
+
+				<div class="container-fluid">
+					<div class="row" id="baseContent" style="overflow: scroll;height: 400px;display: none;">
+						<table class="table" id="baseTable" data-pagination="true" data-show-refresh="true" data-show-toggle="true"
+						 data-showColumns="true" style="min-width: 600px;">
+							<thead>
+								<tr>
+									<th data-field="sellRecordId" data-sortable="true">
+										记录编码
+									</th>
+									<th data-field="srNumber">
+										委托单位
+									</th>
+									<th data-field="srNumber">
+										单位地址
+									</th>
+									<th data-field="srNumber">
+										检定地点
+									</th>
+									<th data-field="srNumber">
+										检定员
+									</th>
+									<th data-field="srNumber">
+										核验员
+									</th>
+									<th data-field="srNumber">
+										日期
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+
+					<div class="row" id="controlContent" style="overflow: scroll;height: 400px;display: none;">
+						<table class="table" id="controlTable" data-pagination="true" data-show-refresh="true" data-show-toggle="true"
+						 data-showColumns="true" style="min-width: 600px;">
+							<thead>
+								<tr>
+									<th data-field="sellRecordId" data-sortable="true">
+										记录编码
+									</th>
+									<th data-field="srNumber">
+										脉冲圈数
+									</th>
+									<th data-field="srNumber">
+										充电桩脉冲常数
+									</th>
+									<th data-field="srNumber">
+										测试点1电流
+									</th>
+									<th data-field="srNumber">
+										测试点2电流
+									</th>
+									<th data-field="srNumber">
+										测试点3电流
+									</th>
+									<th data-field="srNumber">
+										日期
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+
+					<div class="row" id="pileContent" style="overflow: scroll;height: 400px;display: none;">
+						<table class="table" id="pileTable" data-pagination="true" data-show-refresh="true" data-show-toggle="true"
+						 data-showColumns="true" style="min-width: 600px;">
+							<thead>
+								<tr>
+									<th data-field="sellRecordId" data-sortable="true">
+										记录编码
+									</th>
+									<th data-field="srNumber">
+										最大电流
+									</th>
+									<th data-field="srNumber">
+										脉冲常数
+									</th>
+									<th data-field="srNumber">
+										等级
+									</th>
+									<th data-field="srNumber">
+										单价
+									</th>
+									<th data-field="srNumber">
+										日期
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+
+					<div class="row" id="envContent" style="overflow: scroll;height: 400px;display: none;">
+						<table class="table" id="envTable" data-pagination="true" data-show-refresh="true" data-show-toggle="true"
+						 data-showColumns="true" style="min-width: 600px;">
+							<thead>
+								<tr>
+									<th data-field="sellRecordId" data-sortable="true">
+										记录编码
+									</th>
+									<th data-field="srNumber">
+										环境温度
+									</th>
+									<th data-field="srNumber">
+										环境湿度
+									</th>
+									<th data-field="srNumber">
+										大气压力
+									</th>
+									<th data-field="srNumber">
+										功率因数
+									</th>
+									<th data-field="srNumber">
+										日期
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+
+					<div class="row" id="viewContent" style="overflow: scroll;height: 400px;display: none;">
+						<table class="table" id="viewTable" data-pagination="true" data-show-refresh="true" data-show-toggle="true"
+						 data-showColumns="true" style="min-width: 600px;">
+							<thead>
+								<tr>
+									<th data-field="sellRecordId" data-sortable="true">
+										记录编码
+									</th>
+									<th data-field="srNumber">
+										v1
+									</th>
+									<th data-field="srNumber">
+										v2
+									</th>
+									<th data-field="srNumber">
+										v3
+									</th>
+									<th data-field="srNumber">
+										v4
+									</th>
+									<th data-field="srNumber">
+										v5
+									</th>
+									<th data-field="srNumber">
+										日期
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+
+					<div class="row" id="resContent" style="overflow: scroll;height: 400px;display: none;">
+						<table class="table" id="resTable" data-pagination="true" data-show-refresh="true" data-show-toggle="true"
+						 data-showColumns="true" style="min-width: 600px;">
+							<thead>
+								<tr>
+									<th data-field="sellRecordId" data-sortable="true">
+										记录编码
+									</th>
+									<th data-field="srNumber">
+										测试电压
+									</th>
+									<th data-field="srNumber">
+										电阻A-PE
+									</th>
+									<th data-field="srNumber">
+										电阻B-PE
+									</th>
+									<th data-field="srNumber">
+										电阻C-PE
+									</th>
+									<th data-field="srNumber">
+										电阻N-PE
+									</th>
+									<th data-field="srNumber">
+										电阻AB
+									</th>
+									<th data-field="srNumber">
+										电阻AC
+									</th>
+									<th data-field="srNumber">
+										电阻BC
+									</th>
+									<th data-field="srNumber">
+										电阻AN
+									</th>
+									<th data-field="srNumber">
+										电阻BN
+									</th>
+									<th data-field="srNumber">
+										电阻CN
+									</th>
+									<th data-field="srNumber">
+										日期
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+
+					<div class="row" id="workerrContent" style="overflow: scroll;height: 400px;display: none;">
+						<table class="table" id="workerrTable" data-pagination="true" data-show-refresh="true" data-show-toggle="true"
+						 data-showColumns="true" style="min-width: 600px;">
+							<thead>
+								<tr>
+									<th data-field="sellRecordId" data-sortable="true">
+										记录编码
+									</th>
+									<th data-field="srNumber">
+										电流10
+									</th>
+									<th data-field="srNumber">
+										电量10
+									</th>
+									<th data-field="srNumber">
+										相对误差10
+									</th>
+									<th data-field="srNumber">
+										电流11
+									</th>
+									<th data-field="srNumber">
+										电量11
+									</th>
+									<th data-field="srNumber">
+										相对误差11
+									</th>
+
+									<th data-field="srNumber">
+										电流20
+									</th>
+									<th data-field="srNumber">
+										电量20
+									</th>
+									<th data-field="srNumber">
+										相对误差20
+									</th>
+									<th data-field="srNumber">
+										电流21
+									</th>
+									<th data-field="srNumber">
+										电量21
+									</th>
+									<th data-field="srNumber">
+										相对误差21
+									</th>
+
+									<th data-field="srNumber">
+										电流30
+									</th>
+									<th data-field="srNumber">
+										电量30
+									</th>
+									<th data-field="srNumber">
+										相对误差30
+									</th>
+									<th data-field="srNumber">
+										电流31
+									</th>
+									<th data-field="srNumber">
+										电量31
+									</th>
+									<th data-field="srNumber">
+										相对误差31
+									</th>
+									<th data-field="srNumber">
+										日期
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+
+					<div class="row" id="viewworkerrContent" style="overflow: scroll;height: 400px;display: none;">
+						<table class="table" id="viewworkerrTable" data-pagination="true" data-show-refresh="true" data-show-toggle="true"
+						 data-showColumns="true" style="min-width: 600px;">
+							<thead>
+								<tr>
+									<th data-field="sellRecordId" data-sortable="true">
+										记录编码
+									</th>
+									<th data-field="srNumber">
+										电流
+									</th>
+									<th data-field="srNumber">
+										实测电量
+									</th>
+									<th data-field="srNumber">
+										充电桩电量
+									</th>
+									<th data-field="srNumber">
+										显示金额
+									</th>
+									<th data-field="srNumber">
+										单价
+									</th>
+									<th data-field="srNumber">
+										电量示值误差
+									</th>
+									<th data-field="srNumber">
+										金额示值误差
+									</th>
+									<th data-field="srNumber">
+										日期
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+
+					<div class="row" id="timeContent" style="overflow: scroll;height: 400px;display: none;">
+						<table class="table" id="timeTable" data-pagination="true" data-show-refresh="true" data-show-toggle="true"
+						 data-showColumns="true" style="min-width: 600px;">
+							<thead>
+								<tr>
+									<th data-field="sellRecordId" data-sortable="true">
+										记录编码
+									</th>
+									<th data-field="srNumber">
+										gps时间
+									</th>
+									<th data-field="srNumber">
+										充电桩时间
+									</th>
+									<th data-field="srNumber">
+										时钟误差
+									</th>
+									<th data-field="srNumber">
+										日期
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+					<div class="container fixed-bottom  text-right">
+						<button class="btn btn-info " type="button" id="btnClose">关闭</button>
+						<button class="btn btn-info " type="button" id="btnSave">保存</button>
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="queryModal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">查询</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-3">
+								<label>开始日期：</label>
+							</div>
+							<div class="col-sm-9">
+								<input id="startTime"  placeholder="......">
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>结束日期：</label>
+							</div>
+							<div class="col-sm-9">
+								<input id="endTime"  placeholder="......">
+							</div>
+						</div>
+						<div class="row" style="margin-top: 20px;">
+							<div class="col-sm-3">
+								<label>记录编码：</label>
+							</div>
+							<div class="col-sm-6">
+								<input id="codeid" type="text">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+						<button id="btnquery" type="button" class="btn btn-primary">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="flatpickr/dist/flatpickr.min.js"></script>
+		<script src="js/util.js"></script>
+		<script type="text/javascript">
+			var divDis = "base";
+
+			function divHide() {
+				switch (divDis) {
+					case "base":
+						$('#baseContent').hide();
+						break;
+					case "control":
+						$('#controlContent').hide();
+						break;
+					case "env":
+						$('#envContent').hide();
+						break;
+					case "pile":
+						$('#pileContent').hide();
+						break;
+					case "res":
+						$('#resContent').hide();
+						break;
+					case "view":
+						$('#viewContent').hide();
+						break;
+					case "workerr":
+						$('#workerrContent').hide();
+						break;
+					case "viewworkerr":
+						$('#viewworkerrContent').hide();
+						break;
+					case "time":
+						$('#timeContent').hide();
+						break;
+				}
+			}
+
+			$('#base').click(function(e) {
+				divHide();
+				divDis = "base";
+				$('#baseContent').show();
+			})
+
+			$('#control').click(function(e) {
+				divHide();
+				divDis = "control";
+				$('#controlContent').show();
+			})
+
+			$('#env').click(function(e) {
+				divHide();
+				divDis = "env";
+				$('#envContent').show();
+			})
+
+			$('#view').click(function(e) {
+				divHide();
+				divDis = "view";
+				$('#viewContent').show();
+			})
+
+			$('#res').click(function(e) {
+				divHide();
+				divDis = "res";
+				$('#resContent').show();
+			})
+
+			$('#pile').click(function(e) {
+				divHide();
+				divDis = "pile";
+				$('#pileContent').show();
+			})
+
+			$('#workerr').click(function(e) {
+				divHide();
+				divDis = "workerr";
+				$('#workerrContent').show();
+			})
+
+			$('#viewworkerr').click(function(e) {
+				divHide();
+				divDis = "viewworkerr";
+				$('#viewworkerrContent').show();
+			})
+
+			$('#time').click(function(e) {
+				divHide();
+				divDis = "time";
+				$('#timeContent').show();
+			})
+
+
+			$("#menu-toggle").click(function(e) {
+				e.preventDefault();
+				$("#wrapper").toggleClass("toggled");
+			});
+			$('#btnClose').click(function() {
+				window.history.back(-1);
+			});
+
+
+
+			function init() {
+				$('#baseContent').show();
+
+				var curtime = new Date();
+				var temptime = new Date();
+				var temp = temptime.setHours(temptime.getHours() - 24);
+				var pretime = new Date(temp);
+
+				$("#startTime").flatpickr({
+					enableTime: true,
+					// altFormat: "F j, Y",
+					dateFormat: "Y-m-d",
+					defaultDate: pretime,
+				});
+
+				$("#endTime").flatpickr({
+					enableTime: true,
+					dateFormat: "Y-m-d",
+					defaultDate: curtime,
+				});
+			}
+			//open modal,init datepicker,input query param
+			function queryData() {
+				console.log('modal show');
+
+				$('#queryModal').modal();
+			}
+
+			function updatebase(basedata) {
+				if (basedata == null) return;
+				basedata.forEach(function(val, index) {
+					tr = "<tr><td>" + val.Codeid + "</td><td>" + val.Weituo + "</td><td>" + val.Danwei + "</td><td>" + val.Testaddr +
+						"</td><td>" + val.Tester + "</td><td>" + val.Heyan + "</td><td>" + new Date(val.Lastdate).format(
+							"yyyy-MM-dd hh:mm:ss") +
+						" </td></tr> ";
+					$("#baseTable tbody").append(tr);
+				});
+			}
+
+			function updatecontrol(controldata) {
+				if (controldata == null) return;
+				controldata.forEach(function(val, index) {
+					tr = "<tr><td>" + val.Codeid + "</td><td>" + val.Pileamps + "</td><td>" + val.Pulseamps + "</td><td>" + val.Testa1 +
+						"</td><td>" + val.Testa2 + "</td><td>" + val.Testa3 + "</td><td>" + new Date(val.Lastdate).format(
+							"yyyy-MM-dd hh:mm:ss") +
+						" </td></tr> ";
+					$("#controlTable tbody").append(tr);
+				});
+			}
+
+			function updateenv(envdata) {
+				if (envdata == null) return;
+				envdata.forEach(function(val, index) {
+					tr = "<tr><td>" + val.Codeid + "</td><td>" + val.Temprature + "</td><td>" + val.Humidity + "</td><td>" + val.Pressure +
+						"</td><td>" + val.Powerfactor + "</td><td>" + new Date(val.Lastdate).format("yyyy-MM-dd hh:mm:ss") +
+						"</td></tr>";
+					$("#envTable tbody").append(tr);
+				});
+			}
+
+			function updatepile(piledata) {
+				if (piledata == null) return;
+				piledata.forEach(function(val, index) {
+					tr = "<tr><td>" + val.Codeid + "</td><td>" + val.Maxa + "</td><td>" + val.Pulseamps + "</td><td>" + val.Grade +
+						"</td><td>" + val.Price + "</td><td>" + new Date(val.Lastdate).format("yyyy-MM-dd hh:mm:ss") + "</td></tr>";
+					$("#pileTable tbody").append(tr);
+				});
+			}
+
+			function updateview(viewdata) {
+				if (viewdata == null) return;
+				viewdata.forEach(function(val, index) {
+					tr = "<tr><td>" + val.Codeid + "</td><td>" + val.V1 + "</td><td>" + val.V2 + "</td><td>" + val.V3 +
+						"</td><td>" + val.V4 + "</td><td>" + val.V5 + "</td><td>" + new Date(val.Lastdate).format("yyyy-MM-dd hh:mm:ss") +
+						" </td></tr> ";
+					$("#viewTable tbody").append(tr);
+				});
+			}
+
+			function updateres(resdata) {
+				if (resdata == null) return;
+				resdata.forEach(function(val, index) {
+					tr = "<tr><td>" + val.Codeid + "</td><td>" + val.Testv + "</td><td>" + val.Res_ape + "</td><td>" + val.Res_bpe +
+						"</td><td>" + val.Res_cpe + "</td><td>" + val.Res_npe + "</td><td>" + val.Res_ab + " </td><td> " + val.Res_ac +
+						"</td><td>" + val.Res_bc + " </td><td>" + val.Res_an + " </td><td>" + val.Res_bn + " </td><td>" + val
+						.Res_cn + " </td><td>" + new Date(val.Lastdate).format("yyyy-MM-dd hh:mm:ss") + "</td></tr>";
+					$("#resTable tbody").append(tr);
+				});
+			}
+
+			function updateworkerr(workerrdata) {
+				if (workerrdata == null) return;
+				workerrdata.forEach(function(val, index) {
+					tr = "<tr><td>" + val.Codeid + "</td><td>" + val.Testa10 + "</td><td>" + val.Power10 + "</td><td>" + val.Err10 +
+						"</td><td>" + val.Testa11 + "</td><td>" + val.Power11 + "</td><td>" + val.Err11 + "</td><td>" +
+						val.Testa20 + "</td><td>" + val.Power20 + "</td><td>" + val.Err20 + "</td><td>" +
+						val.Testa21 + "</td><td>" + val.Power21 + "</td><td>" + val.Err21 + "</td><td>" +
+						val.Testa30 + "</td><td>" + val.Power30 + "</td><td>" + val.Err30 + "</td><td>" +
+						val.Testa31 + "</td><td>" + val.Power31 + "</td><td>" + val.Err31 + "</td><td>" +
+						new Date(val.Lastdate).format("yyyy-MM-dd hh:mm:ss") + "</td></tr>";
+					$("#workerrTable tbody").append(tr);
+				});
+			}
+
+			function updateviewworkerr(viewworkerrdata) {
+				if (viewworkerrdata == null) return;
+				viewworkerrdata.forEach(function(val, index) {
+					tr = "<tr><td>" + val.Codeid + "</td><td>" + val.Testa + "</td><td>" + val.Power + "</td><td>" + val.Pilepower +
+						"</td><td>" + val.Pileprice + "</td><td>" + val.Priceper + "</td><td>" + val.Powererr + " </td><td> " + val
+						.Priceerr + " </td><td> " + new Date(val.Lastdate).format("yyyy-MM-dd hh:mm:ss") + "</td></tr>";
+					$("#viewworkerrTable tbody").append(tr);
+				});
+			}
+
+			function updatetime(timedata) {
+				if (timedata == null) return;
+				timedata.forEach(function(val, index) {
+					tr = "<tr><td>" + val.Codeid + "</td><td>" + new Date(val.Gpstime).format("yyyy-MM-dd hh:mm:ss") + "</td><td>" +
+						new Date(val.Piletime).format("yyyy-MM-dd hh:mm:ss") + "</td><td>" + val.Timeerr +
+						"</td><td>" + "</td><td>" + new Date(val.Lastdate).format("yyyy-MM-dd hh:mm:ss") + "</td></tr> ";
+					$("#timeTable tbody").append(tr);
+				});
+			}
+			//refresh ui table
+			function updateui(basedata, controldata, envdata, piledata, viewdata, resdata, workerrdata, viewworkerrdata,
+				timedata) {
+				updatebase(basedata);
+				updatecontrol(controldata);
+				updateenv(envdata);
+				updatepile(piledata);
+				updateview(viewdata);
+				updateres(resdata);
+				updateworkerr(workerrdata);
+				updateviewworkerr(viewworkerrdata);
+				updatetime(timedata);
+			}
+			//query data from mysql
+			$('#btnquery').click(async function() {
+				console.log('sdfd');
+
+				var opt = {
+
+				};
+
+
+				console.log($('#codeid').val(), $('#startTime').val(), $('#endTime').val());
+				opt.Codeid = $('#codeid').val();
+				opt.Starttime = new Date($('#startTime').val());
+				opt.Endtime = new Date($('#endTime').val());
+
+				if (opt.Codeid=="") {
+					alert("记录编码不能为空");
+					return;
+				}
+				basedata = await getbasedata(opt);
+				controldata = await getcontroldata(opt);
+				envdata = await getenvdata(opt);
+				piledata = await getpiledata(opt);
+				viewdata = await getviewdata(opt);
+				resdata = await getresdata(opt);
+				workerrdata = await getworkerrdata(opt);
+				viewworkerrdata = await getviewworkerrdata(opt);
+				timedata = await gettimedata(opt);
+				updateui(basedata, controldata, envdata, piledata, viewdata, resdata, workerrdata, viewworkerrdata,
+					timedata)
+				console.log(basedata, controldata, envdata, piledata, viewdata, resdata, workerrdata, viewworkerrdata, timedata);
+				$('#queryModal').modal('hide');
+			});
+
+			init();
+			// 			async function insertBase() {
+			// 				tempdata = await getbasedata();
+			// 				tempdata.forEach(function(val, index) {
+			// 					tr = "<tr><td>" + val.Codeid + "</td><td>" + val.Weituo + "</td><td>" + val.Danwei + "</td><td>" + val.Testaddr +
+			// 						"</td><td>" + val.Tester + "</td><td>" + val.Heyan + "</td></tr>";
+			// 					$("#baseTable tbody").append(tr);
+			// 
+			// 					// for (var i in val){
+			// 					// 	console.log(i,val[i]);
+			// 					// 	updateBase(val[i]);
+			// 					// }
+			// 				});
+			// 			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="./bootstrap-3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+		<script src="./js/jquery.min.js"></script>
+		<script src="./bootstrap-3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./bower_components/moment/min/moment.min.js"></script>
+		<script type="text/javascript" src="./bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="js/util.js"></script>
+		<title>jjg测试</title>
+		<style type="text/css">
+			text,
+			td {
+				color: blue;
+			}
+
+			#pilepower,
+			#pileprice {
+				/* 	background-color: #efefef; */
+				border-color: #000000;
+				border-style: solid;
+				border-top-width: 0px;
+				border-right-width: 0px;
+				border-bottom-width: 1px;
+				border-left-width: 0px;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body style="overflow: hidden !important;">
+		<ul class="nav nav-pills" id="menuTab">
+			<li><a href="jjg_set.html">新建测试</a></li>
+			<li><a href="" id="btnSave">保存测试</a></li>
+			<li><a href="jjgdb.html">记录管理</a></li>
+		</ul>
+
+		<div id="" style="margin-left: 20px;margin-top: 20px;">
+			<ul class="nav nav-tabs" id="contentTab">
+				<li role="presentation" class="active"><a href="#env">外部环境</a></li>
+				<li role="presentation"><a href="#view">外观检查</a></li>
+				<li role="presentation"><a href="#res">绝缘检测</a></li>
+				<li role="presentation"><a href="#workerr">工作误差</a></li>
+				<li role="presentation"><a href="#viewworkerr">示值及付费金额</a></li>
+				<li role="presentation"><a href="#timeerr">时钟示值</a></li>
+			</ul>
+		</div>
+
+		<div class="tab-content" style="margin-top: 20px;margin-left: 20px;">
+			<div class="tab-pane active" id="env">
+				<div class="row">
+					<div class="col-sm-3">
+						<label>环境温度：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="temprature">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>环境湿度：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="humidity">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>大气压力：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="pressure">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>充电桩输出功率因数：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="powerfactor">0</em>
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-pane" id="view">
+				<div class="row">
+					<div class="col-sm-6">
+						<label>标记是否完全，字迹是否清楚</label>
+					</div>
+					<div class="col-sm-3">
+						<input type="checkbox"> 合格</input>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<label>是否有明显的破损</label>
+					</div>
+					<div class="col-sm-3">
+						<input type="checkbox"> 合格</input>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<label>是否没有防止非授权人输入数据或操作的措施</label>
+					</div>
+					<div class="col-sm-3">
+						<input type="checkbox"> 合格</input>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<label>显示位数是否符合规定</label>
+					</div>
+					<div class="col-sm-3">
+						<input type="checkbox"> 合格</input>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<label>基本功能是否正常</label>
+					</div>
+					<div class="col-sm-3">
+						<input type="checkbox"> 合格</input>
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-pane" id="res">
+				<div class="row">
+					<div class="col-sm-3">
+						<label>实验电压：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="testv">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>阻值A-PE：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="res_ape">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>阻值B-PE：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="res_bpe">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>阻值C-PE：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="res_cpe">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>阻值N-PE：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="res_npe">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>阻值AB：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="res_ab">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>阻值AC：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="res_ac">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>阻值BC：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="res_bc">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>阻值AN：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="res_an">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>阻值BN：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="res_bn">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>阻值CN：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="res_cn">0</em>
+					</div>
+				</div>
+				<hr />
+				<div class="row" style="position:absolute;top: 460px;left:600px">
+					<button type="button" class="btn btn-info" id="btnResSatrt">开始测试</button>
+					<button type="button" class="btn btn-info" id="btnResStop">停止测试</button>
+				</div>
+			</div>
+			<div class="tab-pane" id="workerr">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="workerrTable">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">电流</th>
+								<th scope="col">电量</th>
+								<th scope="col">相对误差</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- <tr>
+								<th scope="row">监测点1-0</th>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th scope="row">监测点1-1</th>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th scope="row">监测点2-0</th>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th scope="row">监测点2-1</th>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th scope="row">监测点3-0</th>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th scope="row">监测点3-1</th>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+							</tr> -->
+							<!-- 	<tr>
+					  <th scope="row">2</th>
+					  <td>Jacob</td>
+					  <td>Thornton</td>
+					  <td>@fat</td>
+					</tr>
+					<tr>
+					  <th scope="row">3</th>
+					  <td colspan="2">Larry the Bird</td>
+					  <td>@twitter</td>
+					</tr> -->
+						</tbody>
+					</table>
+				</div>
+				<hr />
+				<div class="row" style="position:absolute;top: 460px;left:600px">
+					<button type="button" class="btn btn-info" id="btnResSatrt">开始测试</button>
+					<button type="button" class="btn btn-info" id="btnResStop">停止测试</button>
+				</div>
+			</div>
+			<div class="tab-pane" id="viewworkerr">
+				<div class="row">
+					<div class="col-sm-3">
+						<label>电流：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="viewtesta">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>标准电能值：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="viewpower">0</em>
+					</div>
+				</div>
+				<hr />
+				<div class="row">
+					<div class="col-sm-3">
+						<label>被检显示电量：</label>
+					</div>
+					<div class="col-sm-3">
+						<input type="text" id="pilepower" value="0"></input>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>被检显示金额：</label>
+					</div>
+					<div class="col-sm-3">
+						<input type="text" id="pileprice" value="0"></input>
+					</div>
+				</div>
+				<hr />
+				<div class="row">
+					<div class="col-sm-3">
+						<label>电量误差：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="powererr">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>金额误差：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="priceerr">0</em>
+					</div>
+				</div>
+				<hr />
+				<div class="row">
+					<button class="btn btn-info " style="margin-left: 20px;" id="btnViewworkerr">计算</button>
+				</div>
+
+				<div class="row" style="position:absolute;top: 460px;left:600px">
+					<button type="button" class="btn btn-info" id="btnResSatrt">开始测试</button>
+					<button type="button" class="btn btn-info" id="btnResStop">停止测试</button>
+				</div>
+			</div>
+			<div class="tab-pane" id="timeerr">
+				<div class="row">
+					<div class="col-sm-3">
+						<label>gps时间：</label>
+					</div>
+					<div class="col-sm-4">
+						<div class='input-group date' id='datetimepicker1'>
+							<input type='text' class="form-control" id="gpsDate" />
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 20px;">
+					<div class="col-sm-3">
+						<label>充电桩时间：</label>
+					</div>
+					<div class="col-sm-4">
+						<div class='input-group date' id='datetimepicker2'>
+							<input type='text' class="form-control" id="pileDate" />
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 20px;">
+					<div class="col-sm-3">
+						<label>误差：</label>
+					</div>
+					<div class="col-sm-4">
+						<em id="timeerrval">0 </em>s
+					</div>
+				</div>
+				 <hr />
+				<div class="row" style="margin-top: 20px;margin-left: 5px;">
+					<button type="button" class="btn btn-info" id="btntimeerr">计算</button>
+				</div>
+			 
+				<div class="row text-right" style="position:absolute;top: 460px;left:600px">
+					<button class="btn btn-info ">开始测试</button>
+					<button class="btn btn-info ">停止测试</button>
+				</div>
+			</div>
+		</div>
+
+
+		<footer class="page-footer font-small blue navbar-fixed-bottom" style="position:absolute;top: 490px;background-color:#F8F8F8">
+			<div class="container text-left">
+				<button class="btn btn-info " id="btnClose">关闭</button>
+			</div>
+		</footer>
+	</body>
+
+
+
+	<script type="text/javascript">
+		$('#contentTab a').click(function(e) {
+			e.preventDefault();
+			$(this).tab('show');
+		});
+
+		$('#btnClose').click(function() {
+			window.history.back(-1);
+		});
+
+		$('#btnSave').click(async function() {
+			await saveall()
+			// console.log($('#gpsDate').val());
+			// console.log($('#datetimepicker1').data("DateTimePicker").date().toDate().getTime() / 1000);
+		});
+
+		$(function() {
+			$('#datetimepicker1').datetimepicker({
+				format: 'YYYY-MM-DD HH:mm:ss'
+			});
+		});
+		$(function() {
+			$('#datetimepicker2').datetimepicker({
+				format: 'YYYY-MM-DD HH:mm:ss'
+			});
+		});
+
+		$('#btnViewworkerr').click(async function() {
+			pilepowerstr = $('#pilepower').val();
+			pilepricestr = $('#pileprice').val();
+			
+			re=await getviewworkerr(pilepowerstr, pilepricestr)
+			console.log(re,re.Powererr.toString(),re.Priceerr.toString());
+			$('#powererr').text(re.Powererr);
+			$('#priceerr').text(re.Priceerr);
+		});
+		
+		$('#btntimeerr').click(async function() {
+			piletime = new Date($('#pileDate').val()).format("yyyy-MM-dd hh:mm:ss");
+			gpstime = new Date($('#gpsDate').val()).format("yyyy-MM-dd hh:mm:ss");
+			$('#timeerrval').text(await gettimeerr(piletime, gpstime));
+		});
+	</script>
+</html>
