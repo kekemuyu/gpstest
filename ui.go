@@ -9,8 +9,34 @@ import (
 
 	log "github.com/donnie4w/go-logger/logger"
 
+	"test/gpstest/gps"
+
 	"github.com/zserge/lorca"
 )
+
+func updateGps(ui lorca.UI, msg gps.Msg) {
+	jsStr := fmt.Sprintf(`$('#utctime').text('%s');
+					   $('#state').text('%s');
+					   $('#latitude').text('%s');
+					   $('#latidudeDirection').text('%s');
+					   $('#longitude').text('%s');
+					   $('#longitudeDirection').text('%s');
+					   $('#speed').text('%s');
+					   $('#speedDirection').text('%s');
+					   $('#utcdate').text('%s');`,
+		msg.Utctime, msg.State, msg.Latitude, msg.LatitudeDirection, msg.Longitude, msg.LongitudeDirecting,
+		msg.Speed, msg.SpeedDirection, msg.Utcdate)
+	ui.Eval(jsStr)
+}
+
+func updateUI(ui lorca.UI) {
+	for {
+		select {
+		case msg := <-gps.DefaultGps.Outdata:
+			updateGps(ui, msg)
+		}
+	}
+}
 
 type Myweb struct {
 	UI lorca.UI
@@ -48,7 +74,7 @@ func (m *Myweb) Run() {
 	defer ln.Close()
 	go http.Serve(ln, http.FileServer(FS))
 	ui.Load(fmt.Sprintf("http://%s", ln.Addr()))
-
+	go updateUI(ui)
 	//	go recieve(ui)
 	// You may use console.log to debug your JS code, it will be printed via
 	// log.Println(). Also exceptions are printed in a similar manner.

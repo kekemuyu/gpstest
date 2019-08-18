@@ -25,7 +25,7 @@ func New(portnum string, baudrate uint) (*Com, error) {
 		DataBits:        8,
 		StopBits:        1,
 		ParityMode:      serial.PARITY_NONE,
-		MinimumReadSize: 4,
+		MinimumReadSize: 50,
 	}
 
 	var err error
@@ -50,7 +50,7 @@ func (c *Com) Run(io IO) {
 			continue
 		}
 		if cnt > 0 {
-			io.Read(buf)
+			io.Read(buf[:cnt])
 		}
 
 	}

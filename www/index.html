@@ -1,70 +1,111 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
-		<title>交流充电桩检测系统</title>
+		<title>gpstest</title>
+		<link rel="shortcut icon" href="favicon.png">
 		<link rel="stylesheet" href="./bootstrap-3.3.7/css/bootstrap.min.css">
-		<script type="text/javascript" src="./js/jquery.min.js"></script>
-		<script type="text/javascript" src="./bootstrap-3.3.7/js/bootstrap.min.js"></script>
-		<script src="js/util.js"></script>
 	</head>
 
-	<body background="img/background.jpg" style="overflow: hidden !important;">
+	<body style="overflow: hidden !important;">
 		<nav class="navbar navbar-default navbar-fixed-top" style="background-color: #009966;">
 			<div class="container navbar-left">
 				<div class="navbar-header">
 					<!--<a class="navbar-brand " href="#">
 						<img src="img/rtlogo.png" width="25px" height="25px" onclick="menu()">
 					</a>-->
-					<text class="navbar-text" style="color: white;font-size: 20px;">交流充电桩检定系统</text>
+					<text class="navbar-text" style="color: white;font-size: 20px;">gpstest</text>
 					<text id="curdate" class="navbar-text" style="color: white;font-size: 20px;margin-left: 270px;"> </text>
 				</div>
 			</div>
 		</nav>
-		<!-- <div class="row" style="margin-top: 60px">
-			<div class="col-sm-3 col-md-2 ">
-				<img src="img/switch.ico" alt="...">
 
-			</div>
-		</div> -->
-		<div class="row" style="margin-top: 90px" >
-			<div class="col-sm-3 col-md-2 col-sm-offset-3" >
-				<div class="thumbnail" style="border:none;background-color:rgba(255, 255, 255, 0); ">
-					<img src="img/JJG.png" alt="..." onclick="openjjg()">
-					<div class="caption">
-						<h4 align="center"><a href="" style="color: white;">JJG计量检定</a></h4>
+
+		<div class="tab-content" style="margin-top: 100px;margin-left: 20px;">
+			<div class="tab-pane active" id="env">
+				<div class="row">
+					<div class="col-sm-3">
+						<label>utc时间：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="utctime">0</em>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-3">
+						<label>定位状态：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="state">0</em>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-3">
+						<label>纬度：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="latitude">0</em>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-3">
+						<label>纬度方向：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="latitudeDirection">0</em>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-3">
+						<label>经度：</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="longitude">0</em>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-3">
+						<label>经度方向:</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="longitudeDirecting">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>对地航速:</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="speed">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>对地航向:</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="speedDirection">0</em>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>utc日期:</label>
+					</div>
+					<div class="col-sm-3">
+						<em id="utcdate">0</em>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-3 col-md-2">
-				<div class="thumbnail" style="border:none;background-color:rgba(255, 255, 255, 0); ">
-					<img src="img/hucao.jpg" alt="...">
-					<div class="caption">
-						<h4 align="center"><a href="" style="color: white;">互操作</a></h4>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3 col-md-2 col-sm-offset-3">
-				<div class="thumbnail" style="border:none;background-color:rgba(255, 255, 255, 0); ">
-					<img src="img/chart.png" alt="...">
-					<div class="caption">
-						<h4 align="center"><a href="" style="color: white;">实时数据</a></h4>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3 col-md-2">
-				<div class="thumbnail" style="border:none;background-color:rgba(255, 255, 255, 0); ">
-					<img src="img/help.png" alt="...">
-					<div class="caption">
-						<h4 align="center"><a href="" style="color: white;">帮助</a></h4>
-					</div>
-				</div>
-			</div>
-		</div>
+		</div>	
 	</body>
+	<script type="text/javascript" src="./js/jquery.min.js"></script>
+	<script type="text/javascript" src="./bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<script src="js/util.js"></script>
 	<script type="text/javascript ">
 		window.moveTo(0,0);
 		
@@ -74,10 +115,6 @@
 		}
 		setInterval(showdate, 1000);
 
-		function openjjg() {
-			console.log("openjjg");
-			document.location.href='jjg.html';
-		}
 	</script>
 
 </html>
